@@ -49,6 +49,8 @@ npx github:maxi-maxima/help-contract audit --out reports/help -- my-cli scan --h
 | Examples | Concrete invocations that reduce guessing. |
 | Exit codes | How automation should interpret success and failure. |
 
+Colorized section headings are recognized without changing the captured output.
+
 ## Scoring
 
 Missing `usage` or `options` is an error-level issue. Missing `commands`, `examples`, or `exit codes` is warning-level.

@@ -35,6 +35,29 @@ Exit codes:
     });
   });
 
+  it("recognizes colorized section headings", () => {
+    const report = analyzeHelp(
+      ["demo", "--help"],
+      `\u001B[1mUsage:\u001B[0m demo <command> [options]
+
+\u001B[1mCommands:\u001B[0m
+  scan <path>       Scan a project
+
+\u001B[1mOptions:\u001B[0m
+  --help            Show help
+
+\u001B[1mExamples:\u001B[0m
+  demo scan .
+
+Exit codes:
+  0 success
+`
+    );
+
+    expect(report.score).toBe(100);
+    expect(report.findings).toHaveLength(0);
+  });
+
   it("reports missing examples and exit codes", () => {
     const report = analyzeHelp(
       ["thin", "--help"],

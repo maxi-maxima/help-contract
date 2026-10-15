@@ -1,3 +1,4 @@
+import { stripVTControlCharacters } from "node:util";
 import type { HelpContractReport } from "./types.js";
 
 export function analyzeHelp(command: string[], output: string): HelpContractReport {
@@ -66,7 +67,7 @@ export function analyzeHelp(command: string[], output: string): HelpContractRepo
 function hasSection(output: string, names: string[]): boolean {
   const lines = output.split(/\r?\n/);
   return lines.some((line) => {
-    const normalized = line.trim().toLowerCase();
+    const normalized = stripVTControlCharacters(line).trim().toLowerCase();
     return names.some((name) => normalized === `${name}:` || normalized.startsWith(`${name}:`) || normalized === name);
   });
 }
